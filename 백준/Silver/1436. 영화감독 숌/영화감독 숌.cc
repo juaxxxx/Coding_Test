@@ -1,8 +1,7 @@
 #include "iostream"
+#include "string"
 
 using namespace std;
-
-bool Check666Num(int* num, int* count, int i, int N);
 
 int main()
 {
@@ -29,73 +28,27 @@ int main()
 
 	*/
 
+	int title;
+	string stitle;
+	int check = 0;
 	int N;
-	cin >> N;
-	
-	int* num = new int;
-	int* count = new int;
 
-	if (N == 1)
+	cin >> N;
+
+	for (title = 666; ; title++)
 	{
-		*num = 666;
-	}
-	else if (N == 2)
-	{
-		*num = 1666;
-	}
-	else
-	{
-		*count = 2;
-		
-		for (int i = 2666; i < 2147483647; i++)
+		stitle = to_string(title);
+
+		if (stitle.find("666") != -1)
 		{
-			if (Check666Num(num, count, i, N))
+			check++;
+			if (check == N)
 			{
+				cout << title;
 				break;
 			}
 		}
 	}
 
-	cout << *num;
-
 	return 0;
-}
-
-bool Check666Num(int* num, int* count, int i, int N)
-{
-	int sixCount = 0;
-	int maxSixCount = 0;
-	int number = i;
-
-	while (true)
-	{
-		int rest = number % 10;
-		if (rest == 6)
-		{
-			sixCount++;
-			maxSixCount = max(maxSixCount, sixCount);
-		}
-		else
-		{
-			sixCount = 0;
-		}
-		number /= 10;
-		if (number == 0)
-		{
-			break;
-		}
-	}
-
-	if (maxSixCount >= 3)
-	{
-		(*count)++;
-		*num = i;
-
-		if (N == *count)
-		{
-			return true;
-		}
-	}
-
-	return false;
 }
